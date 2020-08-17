@@ -6,6 +6,7 @@
                     </div>
                     <div class="shareBox rrrrrrrrrr">
                         <div class="shareItem shareOne"></div>
+                        <div class="shareItem shareOne">afasfsafd</div>
                         <div class="shareItem shareTwo"></div>
                               <div class="shareItem shareTwo">dadasdasd</div>
                         <div class="shareItem shareThree"></div>
