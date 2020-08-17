@@ -4,8 +4,9 @@
                     <div class="eimal">
                         <span style="color:#bf9456" v-text='emailText[language]'></span><br/> support@pokerclubs.ca
                     </div>
-                    <div class="shareBox">
+                    <div class="shareBox safasfd">
                         <div class="shareItem shareOne"></div>
+                        <div class="shareItem shareOne">afasfsafd</div>
                         <div class="shareItem shareTwo"></div>
                         <div class="shareItem shareThree"></div>
                         <div class="shareItem shareFour"></div>
