@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <link rel="stylesheet" href="css/basice.css">
+    <script src="js/scroll.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.dialog.min.js"></script>
+    <script src="js/booth.js"></script>
+    <script src="js/data.js"></script>
+</head>
+<body>
+<div  id="allData" >
+    <div  class="pc">
+        <div class="banner">
+            <div class="topWarp clearfix">
+                <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+                <div class="topRight right">
+                    <div class="eimal">
+                        <span style="color:#bf9456" v-text='emailText[language]'></span><br/> support@pokerclubs.ca
+                    </div>
+                    <div class="shareBox">
+                        <div class="shareItem shareOne"></div>
+                        <div class="shareItem shareTwo"></div>
+                        <div class="shareItem shareThree"></div>
+                        <div class="shareItem shareFour"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <div class="navBox clearfix">
+                    <div class="navItem "><a href="./index.html" v-text='navData[language][0]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][1]'></a></div>
+                    <div class="line">|</div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
+                </div>
+                <div class="language clearfix">
+                    <div class="languageItem" @click='showLanguage'>
+                        <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                        <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
+                    </div>
+                    <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
+                        <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+
+        <div class="videoList">
+            <div class="videoListItem clearfix">
+                <div class="itemImg left pcViode"   mark='url1'><img src="./image/videoItem1.png" alt=""></div>
+                <div class="itemText right">
+                    <div class="title" v-text="videoDataL[language][0].title"></div>
+                    <div class="text" v-text="videoDataL[language][0].text"></div>
+                </div>
+            </div>
+            <div class="videoListItem clearfix">
+                <div class="itemImg left pcViode"   mark='url2'><img src="./image/videoItem2.png" alt=""></div>
+                <div class="itemText right">
+                    <div class="title"  v-text="videoDataL[language][1].title"></div>
+                    <div class="text" v-text="videoDataL[language][1].text"></div>
+                </div>
+            </div>
+            <div class="videoListItem clearfix">
+                <div class="itemImg left pcViode"  mark='url3'><img src="./image/videoItem3.png" alt=""></div>
+                <div class="itemText right">
+                    <div class="title"  v-text="videoDataL[language][2].title"></div>
+                    <div class="text" v-text="videoDataL[language][2].text"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottomBox">
+            <div class="bottomContent clearfix">
+                <div class="bottomLeft">
+                    <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+                    <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+                </div>
+                <div class="bottomRight">
+                    <div class="bottomlist clearfix">
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"> Download</a></div>
+                            <div class="itemText"><a href="#news"  v-text="bottomData[language][5]"> News</a></div>
+                            <div class="itemText"><a href="#video"  v-text="bottomData[language][4]"> Video</a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                            <div class="itemText"><a  href="#video" v-text="bottomData[language][4]"></a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="mobile">
+        <div class="titlebox">
+            <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+            <div class="navBtn" @click='showNavFn'><img :src="showNav ? './image/navIconClose.png': './image/navIcon.png'" alt=""></div>
+            <div class="changeLaug right"  @click='showLanguage'>
+                <div class="text" v-text="language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
+                <div class="icon"><img :src='showLang ? "./image/arrtop.png":"./image/arrBottom.png"' alt=""></div>
+                <div class="languageList"  v-show='showLang'  @click='changeLanguage' v-text="language =='CHN' ? languageChangeVal[language][1] : languageChangeVal[language][0]"></div>
+            </div>
+        
+            <div class="navList" v-show='showNav'>
+                <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
+            </div>
+        
+        </div>
+
+        
+        <div class="banner">
+            <div class="bgImg"><img src="image/banner.jpg" alt=""></div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+    
+        <!-- <div class="downBox clearfix">
+            <div class="downWarp clearfix">
+                <div class="downItem"><a href="#"><img src="./image/app.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/and.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/google.png" alt=""></a></div>
+            </div>
+        </div> -->
+        
+        <div class="videoList">
+            <div class="videoListItem">
+                <div class="itemImg openVideo" mark='url1' ><img src="./image/videoItem1.png" alt=""></div>
+                <div class="itemText">
+                    <div class="title" v-text="videoDataL[language][0].title"></div>
+                    <div class="text" v-text="videoDataL[language][0].text"></div>
+                </div>
+            </div>
+            <div class="videoListItem">
+                <div class="itemImg openVideo" mark='url2' ><img src="./image/videoItem2.png" alt=""></div>
+                <div class="itemText">
+                    <div class="title"  v-text="videoDataL[language][1].title"></div>
+                    <div class="text" v-text="videoDataL[language][1].text"></div>
+                </div>
+            </div>
+            <div class="videoListItem">
+                <div class="itemImg openVideo" mark='url3'><img src="./image/videoItem3.png" alt=""></div>
+                <div class="itemText">
+                    <div class="title"  v-text="videoDataL[language][2].title"></div>
+                    <div class="text" v-text="videoDataL[language][2].text"></div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <div class="btnBox">
+            <div class="btnContent clearfix">
+                <div class="btnItem"><a href=""><img src="./image/btn01.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn02.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn03.png" alt=""></a></div>
+            </div>
+        </div>
+    
+        <div class="bottomBox">
+    
+            <div class="bottomlist">
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                    <div class="itemText newScoll"><a href="javascript:void(0);"  v-text="bottomData[language][5]"></a></div>
+                    <div class="itemText videoScoll"><a href="javascript:void(0);"  v-text="bottomData[language][4]"></a></div>
+                </div>
+    
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                    <div class="itemText videoScoll"><a  href="javascript:void(0);" v-text="bottomData[language][4]"></a></div>
+                </div>
+    
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                </div>
+            </div>
+    
+            <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+            <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+            
+        </div>
+    
+    
+    </div>
+</div>
+
+
+<script>
+    $(function () {  
+
+            var language = 　$.cookie("pokerclubs")  
+            if(language !='CHN' && language !='ENG'){
+                language = 'CHN'
+            }
+           
+            var vm = new Vue({
+                el: '#allData',
+                data: {
+                    showLang:false,
+                    language:language,   //当前语言
+                    showNav:false,   //手机端是否显示导航列表 
+                    showLang:false,
+                    navData:_navData,
+                    languageChangeVal:{
+                        CHN:["中文",'英文'],
+                        ENG:["CHN",'ENG']
+                    },
+                    emailText:{
+                        "CHN":'发送邮箱至', 
+                        "ENG":'Send your mail at',
+                    },
+                    bottomData:_bottomData,
+                    videoDataL:{
+                        "ENG":[
+                            {
+                                title:"Create a club",
+                                text:"This video titled ‘Create a Club’ explains in detail how to start your very own club on our APP. Clubs are where the games are organized on PokerClubs APP, it’s helpful for better gaming experience that you create a club with complete information and active members. Following the instructions in this video will help you achieve just that. For better understanding of the info, we do recommend you to download and install our APP before you dive into those videos."
+                            },
+                            {
+                                title:"Club management",
+                                text:"After inception, the club also requires management on its members, games and daily operations. This video titled ‘Create a game’ not only introduces the game settings, also how to manage members and their in game items. For better understanding of the info, we do recommend you to download and install our APP before you dive into those videos."
+                            },
+                            {
+                                title:"Advanced club management video",
+                                text:"This video titled ‘Create a Club’ explains in detail how to start your very own club on our APP. Clubs are where the games are organized on PokerClubs APP, it’s helpful for better gaming experience that you create a club with complete information and active members. "
+                            }
+                        ], 
+                        "CHN":[
+                            {
+                                title:"创建俱乐部",
+                                text:"这部“创建俱乐部”的视频详细介绍如何在APP上建立自己的俱乐部。PokerClubs上的游戏是在各个俱乐部中进行的，为了获得更好的游戏体验，建立一个信息完整，成员活跃的俱乐部是非常有帮助的。按照视频中的步骤操作会帮助您。为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
+                            },
+                            {
+                                title:"俱乐部管理",
+                                text:"俱乐部成立之后，需要管理其中的成员，游戏和日常事务。这部“创建游戏”视频不但详细介绍关于游戏的设置，还介绍了如何对成员的游戏道具进行管理。为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
+                            },
+                            {
+                                title:"俱乐部管理进阶",
+                                text:"俱乐部已经拥有众多的会员了，该如何保证俱乐部拥有者即时了解整个俱乐部的运营情况以及会员的对局情况？为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
+                            }
+                        ]
+                        }
+                  
+                },
+                mounted() {
+                    this.$nextTick(()=>{
+
+                        $(".openVideo").click(function(){
+                                var url={
+                                    url1:"./image/a.mp4",
+                                    url2:"./image/a.mp4",
+                                    url3:"./image/a.mp4"
+                                }
+                                var _mark = $(".openVideo").attr("mark");
+                                var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div><video src="'+ url[_mark]+'" controls autoplay style="width:100%;"  id="video" class="videoMark"></video></div>'
+                                $("#allData").append(content)
+                                $(".vidoePop .close,.videoBg").click(function(){
+                                    $(".vidoePop").remove()
+                                })
+
+                                var elevideo = document.getElementById("video");
+                                    elevideo.addEventListener('pause', function () { //暂停开始执行的函数
+                                        $(".vidoePop").remove()
+                                    });
+                        })
+
+                        boothEvent()
+
+                        //PC视频播放
+                        $('.pcViode').click(function() {
+                            var url={
+                                    url1:"./image/a.mp4",
+                                    url2:"./image/a.mp4",
+                                    url3:"./image/a.mp4"
+                                }
+
+                            var _mark = $(".openVideo").attr("mark");
+
+                            var content = '<video src="'+ url[_mark]+'" controls autoplay style="width:1000px;"></video>';
+                            $.dialog({
+                                id: 'customId',
+                                title: '',
+                                hideHeader: true,
+                                hideClose: false,
+                                content: content,
+                            });
+                        });
+
+
+                    })
+                },
+                methods:{
+                    showLanguage:function(){
+                        this.showLang = !this.showLang
+                        this.showNav = false
+                    },
+                    showNavFn:function(){
+                        this.showNav = !this.showNav
+                        this.showLang = false
+                    },
+                    changeLanguage:function(){
+                        if(this.language == 'CHN'){
+                            $.cookie("pokerclubs",'ENG')  
+                        }
+                        if(this.language == 'ENG'){
+                            $.cookie("pokerclubs",'CHN') 
+                        }
+                        this.showLang = false
+                        location.reload() 
+                    }
+                }
+            })
+
+
+    })
+
+       
+
+</script>
+    
+</body>
+
+</html>

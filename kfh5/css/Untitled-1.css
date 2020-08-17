@@ -1,0 +1,169 @@
+
+.nav .navBox .navContent{
+    float: left;
+}
+.nav .navBox .navContent .navItem{
+    float: left;
+    line-height: 60px;
+    color:#fff;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right:65px;
+    position: relative;
+}
+.nav .navBox .navContent .navItem.active::after{
+    content: "";
+    position: absolute;
+    width:100%;
+    height:4px;
+    background: #be9557;
+    left: 0;
+    bottom: 0;
+}
+
+.nav .navBox .navContent .navItem.active::before{
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform:translateX(-50%);
+    content: '';
+    border-top: 5px transparent dashed;
+    border-left: 5px transparent dashed;
+    border-bottom: 5px  #be9557 solid;
+    border-right: 5px transparent dashed;
+   }
+
+.language{
+    float: right;
+    background-color: #000000;
+    color: #ccc;
+    width: 220px;
+}
+.language .langItem{
+    float:left;
+    line-height: 60px;
+    width:94px;
+    display: inline-block;
+    cursor: pointer;
+}
+.language .line{
+    float:left;
+    width:2px;
+    height:20px;
+    background: #be9557;
+    margin: 20px 15px;
+}
+
+
+.swiper-slide {
+    font-size: 36px;
+    text-align: center;
+    background: #fff;
+}
+.swiper-slide a{
+    display: block;
+    height:100%;
+    width:100%;
+    text-align:center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+.banner{
+    
+}
+.banner .swiper-slide{
+    height:820px;
+
+}
+
+.videoBox{
+    width: 1200px;
+    margin:auto;
+    padding: 40px 0;
+}
+.videoBox .videoItem{
+    margin-top: 100px;
+}
+.videoBox .videoImg{
+    float: left;
+    width:760px;
+    height:425px;
+    position: relative;
+}
+.videoBox .videoImg img{
+    left: 0;
+    right:0;
+    top:0;
+    bottom: 0;
+    margin:auto;
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+}
+.videoBox .voideContent{
+    float: right;
+    width: 380px;
+    padding: 10px 30px;
+}
+
+.videoBox .voideContent .voideTitle{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 40px;
+    border-bottom: 2px dotted #be9557;
+}
+
+.videoBox .voideContent .voideText{
+    padding: 10px 0;
+    color: #8b8b8b;
+    font-size: 14px;
+    word-wrap:break-word;
+    line-height: 27px;
+}
+
+.new{
+    height:400px;
+    background: red;
+    overflow: hidden;
+}
+
+.moveBox .text{ opacity:0;  color: #ffff;font-size: 40px;}
+.moveBox.move .moveText{ 
+    animation:move 3s forwards; 
+}
+
+.moveBox.move .moveText1{ 
+    animation:move 3s forwards .4s; 
+}
+
+.moveBox.move .moveText2{ 
+    animation:move 3s forwards .8s; 
+}
+
+.moveBox.move .moveText3{ 
+    animation:move 3s forwards 1.2s; 
+}
+@keyframes move{
+    from{ opacity:0;  transform:translate(0px, 0px);}
+    to{ opacity:1;  transform:translate(100px, 0px);}
+}
+
+
+.voide{
+    height:400px;
+    background: green
+}
+
+.ad{
+    height:400px;
+    background: blue
+}
+
+.fd{
+    height:400px;
+    background: black;
+}

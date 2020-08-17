@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <link rel="stylesheet" href="css/basice.css">
+    <script src="js/scroll.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.dialog.min.js"></script>
+    <script src="js/booth.js"></script>
+    <script src="js/data.js"></script>
+</head>
+<body>
+<div id="allData">
+    <div  class="pc">
+        <!-- banner -->
+        <div class="banner">
+            <div class="topWarp clearfix">
+                <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+                <div class="topRight right">
+                    <div class="eimal">
+                        <span style="color:#bf9456" v-text='emailText[language]'></span><br/> support@pokerclubs.ca
+                    </div>
+                    <div class="shareBox">
+                        <div class="shareItem shareOne"></div>
+                        <div class="shareItem shareTwo"></div>
+                        <div class="shareItem shareThree"></div>
+                        <div class="shareItem shareFour"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <div class="navBox clearfix">
+                    <div class="navItem "><a href="javascript:void(0);" class="active" v-text='navData[language][0]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][1]'></a></div>
+                    <div class="line">|</div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
+                </div>
+                <div class="language clearfix">
+                    <div class="languageItem" @click='showLanguage'>
+                        <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                        <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
+                    </div>
+                    <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
+                        <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+
+        <div class="downBox clearfix">
+            <div class="downWarp clearfix">
+                <div class="downItem"><a href="#"><img src="./image/app.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/and.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/google.png" alt=""></a></div>
+            </div>
+        </div>
+        <a name='news'></a>
+
+        <!-- 新闻列表 -->
+        <div class="contentBox">
+            <div class="contentWarp">
+                <div class="contentHeader" v-text="newList[language].title"></div>
+                <div class="scrollBox pcScrollBox">
+                    <ul>
+                        <li  v-for="(val,ind) in contentList">
+                            <a :href="'./detail.html?detail='+val.id" class="clearfix">
+                                <div class="scrollBtext" v-text='val.title'></div>
+                                <div class="srcollTime" v-text='formatDateFn(val.createTime)'></div>
+                                <div class="srocllLine">|</div>
+                                <div class="news"  v-text="newList[language].news"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 视频列表 -->
+        <div class="videoBox" >
+            <a name='video'></a>
+            <div class="videoItem videoItemBg">
+                <div class='videoBg videoLeftBg'><img src="./image/bg01.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg02.png" alt=""></div>
+                <div class="videoWarp clearfix" style="padding-top:220px">
+                    <div class="imgBox left moveLeft" id="viode1">
+                        <img src="./image/video1.jpg" alt="">
+                    </div>
+        
+                    <div class="textBox right moveRight" style="margin-right:0%;" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][0].inital"></div>
+                        <div class="title" v-text="videoData[language][0].title"></div>
+                        <div class="text" v-text="videoData[language][0].content"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deLine"></div>
+
+            <div class="videoItem">
+                <div class='videoBg videoLeftBg'><img src="./image/bg03.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg04.png" alt=""></div>
+
+                <div class="videoWarp clearfix">
+                    <div class="imgBox right moveRight" style="width: 50%;">
+                        <!-- <a href="./videoList.html" style="display: block;"> -->
+                            <div class="swiper-container pc-swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">创建俱乐部</div></a></div></div>
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理</div></a></div></div>
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理进阶</div></a></div></div>
+                                </div>
+                            </div>
+                        <!-- </a> -->
+                    </div>
+        
+                    <div class="textBox left moveLeft" style="width: 45%;" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][1].inital"></div>
+                        <div class="title" v-text="videoData[language][1].title"></div>
+                        <div class="text" v-text="videoData[language][1].content"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="deLine"></div>
+            <div class="videoItem" style="height: 600px;">
+                <div class='videoBg videoLeftBg'><img src="./image/bg01.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg02.png" alt=""></div>
+                <div class="videoWarp clearfix" >
+                    <div class="imgBox left moveLeft"  style="width: 48%;" id="viode2">
+                        <img src="./image/video3.jpg" alt="">
+                    </div>
+        
+                    <div class="textBox right moveRight"  style="width: 45%;" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][2].inital"></div>
+                        <div class="title" v-text="videoData[language][2].title"></div>
+                        <div class="text" v-text="videoData[language][2].content"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="deLine"></div>
+            <div class="videoItem">
+                <div class='videoBg videoLeftBg'><img src="./image/bg03.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg04.png" alt=""></div>
+
+                <div class="videoWarp clearfix">
+                    <div class="imgBox right moveRight" style="width: 40%;margin-top: -40px;">
+                        <img src="./image/video4.jpg" alt="">
+                    </div>
+                    <div class="textBox left moveLeft" style="width: 48%;" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][3].inital"></div>
+                        <div class="title"  v-text="videoData[language][3].title"></div>
+                        <div class="text"  v-text="videoData[language][3].content"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="deLine"></div>
+
+            <div class="videoItem">
+                <div class='videoBg videoLeftBg'><img src="./image/bg01.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg02.png" alt=""></div>
+                <div class="videoWarp clearfix" >
+                    <div class="imgBox left moveLeft" style="width: 40%;margin-top: -40px;">
+                        <img src="./image/video5.jpg" alt="">
+                    </div>
+        
+                    <div class="textBox right moveRight" style="width: 46%;"  :class="{ chin: language =='CHN' }">
+                        <div class="inital" v-text="videoData[language][4].inital"></div>
+                        <div class="title"  v-text="videoData[language][4].title"></div>
+                        <div class="text" v-text="videoData[language][4].content"></div>
+                    <div class="more">MORE</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="deLine"></div>
+
+            <div class="videoItem videoItemBg01">
+                <div class='videoBg videoLeftBg'><img src="./image/bg03.png" alt=""></div>
+                <div class='videoBg videoRightBg'><img src="./image/bg04.png" alt=""></div>
+
+                <div class="videoWarp clearfix" >
+                    <div class="textBox left moveLeft"  style="width: 50%;" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][5].inital"></div>
+                        <div class="title"  v-text="videoData[language][5].title"></div>
+                        <div class="text" v-text="videoData[language][5].content"></div>
+                        <div class="more">MORE</div>
+                    </div>
+                    <div class="imgBox left moveRight"  style="width: 34%; margin-top: -50px;  padding-left: 12%;">
+                        <img src="./image/video6.jpg" alt="">
+                    </div>
+        
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="btnBox">
+            <div class="btnContent clearfix">
+                <div class="btnItem"><a href=""><img src="./image/btn01.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn02.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn03.png" alt=""></a></div>
+            </div>
+        </div>
+
+        <div class="bottomBox">
+            <div class="bottomContent clearfix">
+                <div class="bottomLeft">
+                    <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+                    <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+                </div>
+                <div class="bottomRight">
+                    <div class="bottomlist clearfix">
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                            <div class="itemText newScoll"><a href="javascript:void(0);"  v-text="bottomData[language][5]"></a></div>
+                            <div class="itemText videoScoll"><a href="javascript:void(0);"  v-text="bottomData[language][4]"></a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                            <div class="itemText videoScoll"><a  href="javascript:void(0);" v-text="bottomData[language][4]"></a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="mobile">
+        <div class="titlebox">
+            <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+            <div class="navBtn" @click='showNavFn'><img :src="showNav ? './image/navIconClose.png': './image/navIcon.png'" alt=""></div>
+            <div class="changeLaug right"  @click='showLanguage'>
+                <div class="text" v-text="language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
+                <div class="icon"><img :src='showLang ? "./image/arrtop.png":"./image/arrBottom.png"' alt=""></div>
+                <div class="languageList"  v-show='showLang'  @click='changeLanguage' v-text="language =='CHN' ? languageChangeVal[language][1] : languageChangeVal[language][0]"></div>
+            </div>
+           
+            <div class="navList" v-show='showNav'>
+                <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
+            </div>
+          
+        </div>
+        <div class="banner">
+            <div class="bgImg"><img src="image/banner.jpg" alt=""></div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+
+        <div class="downBox clearfix">
+            <div class="downWarp clearfix">
+                <div class="downItem"><a href="#"><img src="./image/app.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/and.png" alt=""></a></div>
+                <div class="downItem"><a href="#"><img src="./image/google.png" alt=""></a></div>
+            </div>
+        </div>
+        
+        <!-- 新闻列表 -->
+        <div class="contentBox">
+            <div class="contentImg"><img src="image/mobileImg01.jpg" alt=""></div>
+            <div class="contentWarp">
+                <div class="contentHeader" v-text="newList[language].title"></div>
+                <div class="scrollBox mobileScrollBox">
+                    <ul>
+                        <li  v-for="(val,ind) in contentList">
+                            <a :href="'./detail.html?detail='+val.id" class="clearfix">
+                                <div class="scrollBtext" v-text='val.title'></div>
+                                <div class="srcollTime"  v-text='formatDateFn(val.createTime)'></div>
+                                <div class="srocllLine">|</div>
+                                <div class="news"  v-text="newList[language].news"></div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 视频列表 -->
+        <div class="videoBox" >
+            <a name='video'></a>
+            <!-- 1 -->
+            <div class="videoItem">
+                <div class="fh"> <img src="./image/fh.png" alt=""></div>
+                <div class="imgBox openVideo" mark='url1'>
+                    <img src="./image/video1.jpg" alt="">
+                </div>
+                <div class="textBox" :class="{ chin: language =='CHN' }">
+                    <div class="inital"  v-text="videoData[language][0].inital"></div>
+                    <div class="title" v-text="videoData[language][0].title"></div>
+                    <div class="text" v-text="videoData[language][0].content"></div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="videoItem" style="background: #f2f2f2;">
+                    <div class="imgBox">
+                        <!-- <a href="./videoList.html" style="display: block;"> -->
+                            <div class="swiper-container mobild-swiper">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">创建俱乐部</div></a></div></div>
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理</div></a></div></div>
+                                    <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理进阶</div></a></div></div>
+                                </div>
+                            </div>
+                        <!-- </a> -->
+                    </div>
+                    <div class="textBox" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][1].inital"></div>
+                        <div class="title" v-text="videoData[language][1].title"></div>
+                        <div class="text" v-text="videoData[language][1].content"></div>
+                    </div>
+            
+            </div>
+            <!-- 3 -->
+            <div class="videoItem" >
+                <div class="videoWarp clearfix" >
+                    <div class="imgBox openVideo" mark='url2'>
+                        <img src="./image/video3.jpg" alt="">
+                    </div>
+                    <div class="textBox" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][2].inital"></div>
+                        <div class="title" v-text="videoData[language][2].title"></div>
+                        <div class="text" v-text="videoData[language][2].content"></div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- 4 -->
+            <div class="videoItem" style="background: #f2f2f2;">
+                <div class="videoWarp">
+                    <div class="imgBox" style="width: 60%;">
+                        <img src="./image/video4.png" alt="">
+                    </div>
+                    <div class="textBox" :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][3].inital"></div>
+                        <div class="title"  v-text="videoData[language][3].title"></div>
+                        <div class="text"  v-text="videoData[language][3].content"></div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <!-- 5 -->
+            <div class="videoItem">
+                <div class="videoWarp" >
+                    <div class="imgBox"  style="width: 60%;">
+                        <img src="./image/video5.jpg" alt="">
+                    </div>
+                    <div class="textBox" :class="{ chin: language =='CHN' }">
+                        <div class="inital" v-text="videoData[language][4].inital"></div>
+                        <div class="title"  v-text="videoData[language][4].title"></div>
+                        <div class="text" v-text="videoData[language][4].content"></div>
+                        <div class="more">MORE</div>
+                    </div>
+                </div>
+
+            </div> 
+            
+            <!-- 6 -->
+            <div class="videoItem" style="background: #f2f2f2;">
+                <div class="fh01"> <img src="./image/fh01.png" alt=""></div>
+                <div class="imgBox"  style="width: 60%;">
+                    <img src="./image/video6.png" alt="">
+                </div>
+                <div class="videoWarp" >
+                    <div class="textBox"  :class="{ chin: language =='CHN' }">
+                        <div class="inital"  v-text="videoData[language][5].inital"></div>
+                        <div class="title"  v-text="videoData[language][5].title"></div>
+                        <div class="text" v-text="videoData[language][5].content"></div>
+                        <div class="more">MORE</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btnBox">
+            <div class="btnContent clearfix">
+                <div class="btnItem"><a href=""><img src="./image/btn01.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn02.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn03.png" alt=""></a></div>
+            </div>
+        </div>
+
+        <div class="bottomBox">
+
+            <div class="bottomlist">
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                    <div class="itemText newScoll"><a href="javascript:void(0);"  v-text="bottomData[language][5]"></a></div>
+                    <div class="itemText videoScoll"><a href="javascript:void(0);"  v-text="bottomData[language][4]"></a></div>
+                </div>
+
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                    <div class="itemText videoScoll"><a  href="javascript:void(0);" v-text="bottomData[language][4]"></a></div>
+                </div>
+
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                </div>
+            </div>
+
+            <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+            <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+               
+        </div>
+    </div>
+
+</div>
+<script>
+    $(function () {  
+
+            var language = 　$.cookie("pokerclubs")  
+            if(language !='CHN' && language !='ENG'){
+                language = 'CHN'
+            }
+           
+            var vm = new Vue({
+                el: '#allData',
+                data: {
+                    newList:_newList,
+                    languageChangeVal:{
+                        CHN:["中文",'英文'],
+                        ENG:["CHN",'ENG']
+                    },
+                    emailText:{
+                        "CHN":'发送邮箱至', 
+                        "ENG":'Send your mail at',
+                    },
+                    month:_month,
+                    showNav:false,   //手机端是否显示导航列表 
+                    showLang:false,
+                    language:language,   //当前语言
+                    navData:_navData,
+                    contentList:{},
+                    videoData:{
+                        "CHN":[{
+                            "inital":"如",
+                            "title":"何在Pokerclubs上开始对局",
+                            "content":"全新组局德州扑克平台，在这里我们从机制上杜绝了用机器人进行游戏的可能性，保障每一个玩家公平游戏的权益，那么，我该如何开始一场对局呢？"
+                        },{
+                            "inital":"创",
+                            "title":"建属于自己的俱乐部吧",
+                            "content":"如果你是一名资深德州扑克玩家，并且正在寻找一个平台能够让你享受与朋友一起进行德州扑克的乐趣，那么Pokerclubs能够提供给你所需要的一切功能，并且在测试期间完全免费。"
+                        },{
+                            "inital":"保",
+                            "title":"险：一种德州扑克新玩法",
+                            "content":"没有人喜欢被bad beat的感觉，那么有什么办法可以降低bad beat的损失，减少我们的游戏波动呢？Pokerclubs为您提供了一种全新的解决方案。"
+                        },{
+                            "inital":"丰",
+                            "title":"富的德州扑克玩法",
+                            "content":"PokerClubs提供了丰富的玩法，包括德州扑克、奥马哈、五张奥马哈和短牌，以及配套的保险、Ante、Straddle、发多次设置。您可以想怎么玩就怎么玩。"
+                        },{
+                            "inital":"安",
+                            "title":"全、公平、可靠",
+                            "content":"PokerClubs从设计上就杜绝了机器人的可能性，在牌桌上提供了极为详细的用户设备、IP、GPS和运营商信息，来帮助您判断对手是否有猫腻，保证游戏的公平可靠。（我们还自愿公开了发牌系统的相关大数据统计，以让您玩得安心。）"
+                        },{
+                            "inital":"成",
+                            "title":"为Pokerclubs顶级合作伙伴",
+                            "content":"您是否想进一步扩大您的俱乐部规模？甚至成为某一地区独家代理？那么加入Pokerclubs，成为顶级合作伙伴吧，您将享受更加丰富的俱乐部权益。"
+                        }],
+                        "ENG":[
+                        {
+                            "inital":"H",
+                            "title":"ow to start a game on Pokerclubs",
+                            "content":"Pokerclubs is a brand new poker app. We eliminate the possibilities of bots to protect players' interests. How to start a game on our app?"
+                        },{
+                            "inital":"C",
+                            "title":"reate your own Club",
+                            "content":"If you are a veteran poker player and looking for a place to enjoy the game with your friends, Pokerclubs offers all the functions that you will need,and it's completely free during testing!"
+                        },
+                        {
+                            "inital":"I",
+                            "title":"nsurance: New way to play",
+                            "content":"No one likes to feeling of taking a bad beat.Is there a way to limit your loss and reduce the variance? Pokerclubs offers a solution. "
+                        },
+                        {
+                            "inital":"W",
+                            "title":"ide Variety of Games",
+                            "content":"Pokerclubs offers plenty of games, including Texas Hold'em, Pot-limit Omaha, 5-card PLO and short deck. Insurance, ante, straddle and dealing it twice are available in game to meet all your needs."
+                        },
+                        {
+                            "inital":"S",
+                            "title":"ecure, Fair, Reliable",
+                            "content":"PokerClubs is designed to eliminate bots. We provide detailed IP and GPS information to help identify collusion (We also provide statistics of your dealing algorithm to ensure your peace of mind)."
+                        },
+                        {
+                            "inital":"T",
+                            "title":"op Partnership with Pokerclubs",
+                            "content":"Looking to expand you club? Even become the exclusive agent in your area? Top Partners with Pokerclubs will enjoy more benefits."
+                        }],
+                    },
+                    bottomData:_bottomData
+                },
+                created(){
+                    var that = this
+                    var tempStr = this.language == 'CHN' ?"CH":"EN"
+                
+                    $.ajax({
+                        url: 'http://pokerclubs.nooly.top/pokerclubs/front/article/list?language=' + tempStr,
+                        type:"get",
+                        success: function (data) {
+                            that.contentList = data.data
+                        },
+                        error : function(){
+                            console.log('err')
+                        }
+                    });
+                },
+                mounted() {
+
+                    this.$nextTick(()=>{
+                        $('.pcScrollBox').myScroll({
+                            speed: 40, //数值越大，速度越慢
+                            rowHeight: 70 //li的高度
+                        });
+                        
+
+                        //手机端打开视频
+                        $(".openVideo").click(function(){
+                                var url={
+                                    url1:"./image/a.mp4",
+                                    url2:"./image/a.mp4"
+                                }
+                                var _mark = $(".openVideo").attr("mark");
+
+                                var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div><video src="'+ url[_mark]+'" controls autoplay style="width:100%;" id="video" class="videoMark"></video></div>'
+                                $("#allData").append(content)
+                                $(".vidoePop .close,.videoBg").click(function(){
+                                    $(".vidoePop").remove()
+                                })
+
+                                var elevideo = document.getElementById("video");
+                                    elevideo.addEventListener('pause', function () { //暂停开始执行的函数
+                                        $(".vidoePop").remove()
+                                    });
+                        })
+
+         
+                        // $('.mobileScrollBox').myScroll({
+                        //     speed: 60, //数值越大，速度越慢
+                        //     rowHeight: 30//li的高度
+                        // });
+                        var swiper = new Swiper('.swiper-container', {
+                            effect: 'coverflow',
+                            grabCursor: true,
+                            centeredSlides: true,
+                            slidesPerView: 'auto',
+                            slideToClickedSlide: true,
+                            initialSlide: 0,
+                            coverflow: {
+                                rotate:40,
+                                stretch: 300,
+                                depth: 100,
+                                modifier: 1,
+                                slideShadows : true
+                            }
+                        });
+
+                        
+                        boothEvent()
+
+                        //pc视频打开
+                        $('#viode1').click(function() {
+                            var content = '<video src="./image/a.mp4" controls style="width:1000px;"></video>';
+                            $.dialog({
+                                id: 'customId',
+                                title: '',
+                                hideHeader: true,
+                                hideClose: false ,
+                                content: content,
+                            });
+                        });
+
+                        $('#viode2').click(function() {
+                            var content = '<video src="./image/a.mp4" controls style="width:1000px;"></video>';
+                            $.dialog({
+                                id: 'customId',
+                                title: '',
+                                hideHeader: true,
+                                hideClose: false,
+                                content: content,
+                            });
+                        });
+
+
+
+                        setAnimation()
+                        window.onscroll = function() {
+                            setAnimation()
+                        }
+
+                        function setAnimation(){
+                            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//scrollTop就是触发滚轮事件时滚轮的高度
+                            var windowHeight =  $(window).height();	
+         
+                            var currentBox = ''
+                            $(".videoItem").each(function(){
+                                    currentBox=$(this).offset().top;	
+                                    if(windowHeight+scrollTop>currentBox){
+                                        $(this).find(".videoWarp").addClass("move");
+                                    }
+                                    else{
+                                        $(this).find(".videoWarp").removeClass("move");
+                                    }
+                            })
+                  
+                        }
+
+                    })
+                },
+                methods:{
+                    formatDateFn(time){
+                        if(this.language == 'CHN')
+                        {
+                            return formatDate(time,'yyyy.MM.dd')
+                        }else{
+                            var _year = formatDate(time,'yyyy')
+                            var _month = formatDate(time,'MM')
+                            var _Day = formatDate(time,'dd')
+                            return this.month[parseInt(_month)-1] +"  " + _Day + ", " + _year
+                        }
+                       
+                    },
+                    showLanguage:function(){
+                        this.showLang = !this.showLang
+                        this.showNav = false
+                    },
+                    showNavFn:function(){
+                        this.showNav = !this.showNav
+                        this.showLang = false
+                    },
+                    changeLanguage:function(){
+                        if(this.language == 'CHN'){
+                            $.cookie("pokerclubs",'ENG')  
+                        }
+                        if(this.language == 'ENG'){
+                            $.cookie("pokerclubs",'CHN') 
+                        }
+                        this.showLang = false
+                        location.reload() 
+                    },
+      
+                }
+            })
+
+
+    })
+
+       
+
+</script>
+    
+</body>
+
+</html>

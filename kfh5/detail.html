@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <link rel="stylesheet" href="css/basice.css">
+
+    <link rel="stylesheet" href="css/quill.core.css"/>
+    <link rel="stylesheet" href="css/quill.snow.css">
+    <link rel="stylesheet" href="css/quill.bubble.css"/>
+
+    <script src="js/scroll.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.dialog.min.js"></script>
+    <script src="js/booth.js"></script>
+    <script src="js/data.js"></script>
+</head>
+<body>
+<div  id="allData"  >
+    <div class="pc">
+        <div class="banner">
+            <div class="topWarp clearfix">
+                <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+                <div class="topRight right">
+                    <div class="eimal">
+                        <span style="color:#bf9456" v-text='emailText[language]'></span><br/> support@pokerclubs.ca
+                    </div>
+                    <div class="shareBox">
+                        <div class="shareItem shareOne"></div>
+                        <div class="shareItem shareTwo"></div>
+                        <div class="shareItem shareThree"></div>
+                        <div class="shareItem shareFour"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav">
+                <div class="navBox clearfix">
+                    <div class="navItem "><a href="./index.html" v-text='navData[language][0]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][1]'></a></div>
+                    <div class="line">|</div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
+                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
+                </div>
+                <div class="language clearfix">
+                    <div class="languageItem" @click='showLanguage'>
+                        <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                        <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
+                    </div>
+                    <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
+                        <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+       
+        <div class="detailBox ql-editor">
+            <div class="title" v-text="detailData.title"></div>
+            <div class="timer"><span style="color: #bf9456;"  v-text='formatDateFn(detailData.createTime)'></span>  <span style="padding:0 5px;color:#a6a6a6;font-size: 18px;">|</span><span style="font-style: oblique;color:#a6a6a6"  v-text='newData[language].news'></span></div>
+            <div class="text" v-html="detailData.content"></div>
+    
+        </div>
+
+        <div class="bottomBox">
+            <div class="bottomContent clearfix">
+                <div class="bottomLeft">
+                    <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+                    <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+                </div>
+                <div class="bottomRight">
+                    <div class="bottomlist clearfix">
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                            <div class="itemText"><a href="#news"  v-text="bottomData[language][5]"></a></div>
+                            <div class="itemText"><a href="#video"  v-text="bottomData[language][4]"></a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                            <div class="itemText"><a  href="#video" v-text="bottomData[language][4]"></a></div>
+                        </div>
+
+                        <div class="bottomListItem">
+                            <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                            <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="mobile">
+        <div class="titlebox">
+            <div class="topLog left"><img src="./image/logo.png" alt=""></div>
+            <div class="navBtn" @click='showNavFn'><img :src="showNav ? './image/navIconClose.png': './image/navIcon.png'" alt=""></div>
+            <div class="changeLaug right"  @click='showLanguage'>
+                <div class="text" v-text="language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
+                <div class="icon"><img :src='showLang ? "./image/arrtop.png":"./image/arrBottom.png"' alt=""></div>
+                <div class="languageList"  v-show='showLang'  @click='changeLanguage' v-text="language =='CHN' ? languageChangeVal[language][1] : languageChangeVal[language][0]"></div>
+            </div>
+        
+            <div class="navList" v-show='showNav'>
+                <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
+            </div>
+        
+        </div>
+        <div class="banner">
+            <div class="bgImg"><img src="image/banner.jpg" alt=""></div>
+            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
+        </div>
+
+
+        
+        <div class="detailBox ql-editor">
+            <div class="title" v-text="detailData.title"></div>
+            <div class="timer"><span style="color: #bf9456;" v-text='formatDateFn(detailData.createTime)'></span>  <span style="padding:0 6px;color:#a6a6a6">|</span>  <span style="font-style: oblique;color:#a6a6a6"  v-text='newData[language].news'></span></div>
+            <div class="text" v-text="detailData.text"></div>
+            <div class="text" v-html="detailData.content"></div>
+            <!-- <div class="bgImg"><img src="./image/detail.jpg" alt=""></div> -->
+        </div>
+
+
+        <div class="btnBox">
+            <div class="btnContent clearfix">
+                <div class="btnItem"><a href=""><img src="./image/btn01.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn02.png" alt=""></a></div>
+                <div class="btnItem"><a href=""><img src="./image/btn03.png" alt=""></a></div>
+            </div>
+        </div>
+
+        <div class="bottomBox">
+            <div class="bottomlist">
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][0]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                    <div class="itemText newScoll"><a href="javascript:void(0);"  v-text="bottomData[language][5]"></a></div>
+                    <div class="itemText videoScoll"><a href="javascript:void(0);"  v-text="bottomData[language][4]"></a></div>
+                </div>
+
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][1]"></div>
+                    <div class="itemText videoScoll"><a  href="javascript:void(0);" v-text="bottomData[language][4]"></a></div>
+                </div>
+
+                <div class="bottomListItem">
+                    <div class="itemHeader" v-text="bottomData[language][2]"></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][7]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][8]"> </a></div>
+                    <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
+                </div>
+            </div>
+
+            <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
+            <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
+            
+        </div>
+
+
+    </div>
+</div>
+
+
+<script>
+    $(function () {  
+
+            function getUrlParam(name){
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r!=null) return unescape(r[2]); return null; //返回参数值
+            } 
+       
+            var language = 　$.cookie("pokerclubs")  
+            if(language !='CHN' && language !='ENG'){
+                language = 'CHN'
+            }
+           
+
+            var vm = new Vue({
+                el: '#allData',
+                data: {
+                    showLang:false,
+                    language:language,   //当前语言
+                    showNav:false,   //手机端是否显示导航列表 
+                    showLang:false,
+                    emailText:{
+                        "CHN":'发送邮箱至', 
+                        "ENG":'Send your mail at',
+                    },
+                    languageChangeVal:{
+                        CHN:["中文",'英文'],
+                        ENG:["CHN",'ENG']
+                    },
+                    newData:{
+                        "CHN":{news:"新闻"}, 
+                        "ENG":{news:"News"},
+                    },
+                    month:_month,
+                    navData:{
+                        "CHN":["首页","关于","服务","充值"], 
+                        "ENG":["HOME","ABOUT","SERVICES","RECHARGE"],
+                    },
+                    bottomData:_bottomData,
+                    detailData:{
+                        title:"",
+                        content:"",
+                        createTime:""
+                    }
+                  
+                },
+
+                created(){
+                    var that = this
+                    var tempStr = this.language == 'CHN' ?"CH":"EN"
+                    var otherStr = tempStr == 'CH' ? "EN":"CH"
+                    $.ajax({
+                        url: 'http://pokerclubs.nooly.top/pokerclubs/front/article?language='+tempStr+'&id='+getUrlParam('detail'),
+                        type:"get",
+                        success: function (data) {
+                            if(data.code == '200'){
+                                that.detailData = {...data.data}
+                                that.detailData.createTime = formatDate(that.detailData.createTime,'yyyy-MM-dd')
+                            }else{
+                                $.ajax({
+                                    url: 'http://pokerclubs.nooly.top/pokerclubs/front/article?language='+otherStr+'&id='+getUrlParam('detail'),
+                                    type:"get",
+                                    success: function (data) {
+                                        if(data.code == '200'){
+                                            that.detailData = {...data.data}
+                                            that.detailData.createTime = formatDate(that.detailData.createTime,'yyyy-MM-dd')
+                                        }
+
+                                    },
+                                    error : function(){
+                                    
+                                    }
+                                });
+                            }
+
+                        },
+                        error : function(){
+                        
+                        }
+                    });
+
+                },
+
+                mounted() {
+                    this.$nextTick(()=>{
+                        boothEvent()
+                    })
+                },
+                methods:{
+                    formatDateFn(time){
+                        if(this.language == 'CHN')
+                        {
+                            return formatDate(time,'yyyy.MM.dd')
+                        }else{
+                            var _year = formatDate(time,'yyyy')
+                            var _month = formatDate(time,'MM')
+                            var _Day = formatDate(time,'dd')
+                            return this.month[parseInt(_month)-1] +"  " + _Day + ", " + _year
+                        }
+                       
+                    },
+                    showLanguage:function(){
+                        this.showLang = !this.showLang
+                        this.showNav = false
+                    },
+                    showNavFn:function(){
+                        this.showNav = !this.showNav
+                        this.showLang = false
+                    },
+                    changeLanguage:function(){
+
+                        if(this.language == 'CHN'){
+                            $.cookie("pokerclubs",'ENG')  
+                        }
+                        if(this.language == 'ENG'){
+                            $.cookie("pokerclubs",'CHN') 
+                        }
+                        this.showLang = false
+                        location.reload() 
+                    }
+                }
+            })
+
+
+    })
+
+       
+
+</script>
+    
+</body>
+
+</html>
