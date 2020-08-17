@@ -50,6 +50,8 @@ img{
   .pc .banner{height: 1150px; background: #ffffff url(../image/banner.jpg) no-repeat center center;background-size: cover;min-width: 1400px;position: relative;}
 
   .pc .banner .topWarp{padding: 38px 70px 35px 72px;}
+  .pc .banner .topWarp .topLog {height: 50px;}
+  .pc .banner .topWarp .topLog img{height: 100%;}
   .pc .banner .topRight{height: 48px;}
   .pc .banner .topRight .eimal{
     background-image: url(../image/icon01.png);height: 100%;
@@ -59,10 +61,11 @@ img{
     font-size: 12px;
     line-height: 22px;
     float: left; margin-right: 40px;
+    background-size: contain;
   }
   .pc .banner .topRight .eimal:hover{background-image: url(../image/icon02.png);  }
   .pc .shareBox{float: left;}
-  .pc .shareItem{ background-position: left center;background-repeat: no-repeat;cursor: pointer; height:45px;width: 45px;margin: 0 5px;; float: left;}
+  .pc .shareItem{ background-position: left center;background-repeat: no-repeat;cursor: pointer; height:45px;width: 45px;margin: 0 5px;; float: left;background-size: contain;}
   .pc .shareBox .shareOne{background-image: url(../image/icon03.png);}
   .pc .shareBox .shareOne:hover{background-image: url(../image/icon04.png);}
  
@@ -91,7 +94,8 @@ img{
 .pc .nav .navBox .line{float: left;margin:0 90px 0 0;font-size: 35px;}
 .pc .nav .language{float: right;width: 220px;background: #191617;margin-right: 70px;cursor: pointer;color: #fff;font-family: Arial, Helvetica, sans-serif;}
 .pc .nav .language .languageItem{width: 100%;height: 60px;  overflow: hidden;}
-.pc .nav .language .img{float: left;padding: 8px 26px;}
+.pc .nav .language .img{float: left;padding: 12px 26px;height: 30px;}
+.pc .nav .language .img img{height: 100%;}
 .pc .nav .language .text{float: left;font-size: 16px;padding-left: 20px;}
 .pc .nav .language .icon{float: left;padding-left: 40px;}
 
@@ -126,7 +130,7 @@ img{
 .pc .downBox{}
 .pc .downWarp{ width:1035px; margin:70px auto;}
 .pc .downBox .downItem{ float: left; height: 120px; padding: 0 5px;}
-.pc .downBox .downItem a{ display: block}
+.pc .downBox .downItem a{ display: block;height: 100%;}
 .pc .downBox .downItem img{ height: 100%;}
 
 
@@ -222,8 +226,8 @@ img{
 
 
 .mobile .titlebox{height: 100px;background: #0c0c0c;line-height: 100px;}
-.mobile .titlebox .topLog{padding-left: 5%;}
-.mobile .titlebox .topLog img{vertical-align: middle;}
+.mobile .titlebox .topLog{padding-left: 5%;height: 30px;}
+.mobile .titlebox .topLog img{vertical-align: middle;height: 100%;}
 
 .mobile .titlebox .changeLaug{width:18%;color: #fff;font-size: 20px;position: relative;padding: 0 35px;}
 .mobile .titlebox .changeLaug .languageList{height: 100px;background: #161516;position:absolute; top:100px;left: 0;z-index: 99;padding: 0 35px;width: 60%;}
@@ -281,7 +285,7 @@ img{
 
 .mobile  .videoBox .videoItem{padding:70px 0;position: relative;}
 
-.mobile .fh{position: absolute;right: 38px;bottom: 44px;width: 150px;}
+.mobile .fh{position: absolute;right: 38px;bottom: 70px;width: 150px;}
 .mobile .fh img{width: 100%;}
 .mobile .fh01{position: absolute;left: 18px;bottom: 205px;width:130px;}
 .mobile .fh01 img{width: 100%;}
