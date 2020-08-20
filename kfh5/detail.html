@@ -46,19 +46,19 @@
             <div class="nav">
                 <div class="navBox clearfix">
                     <div class="navItem "><a href="./index.html" v-text='navData[language][0]'></a></div>
-                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][1]'></a></div>
+                    <div class="navItem"><a href="./about.html" v-text='navData[language][1]'></a></div>
                     <div class="line">|</div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
                 </div>
                 <div class="language clearfix">
                     <div class="languageItem" @click='showLanguage'>
-                        <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <!-- <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
                         <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
                         <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
                     </div>
                     <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
-                        <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div>
+                        <!-- <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
                         <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@
         
             <div class="navList" v-show='showNav'>
                 <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
-                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="./about.html" v-text='navData[language][1]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
             </div>
@@ -207,10 +207,7 @@
                     language:language,   //当前语言
                     showNav:false,   //手机端是否显示导航列表 
                     showLang:false,
-                    emailText:{
-                        "CHN":'发送邮箱至', 
-                        "ENG":'Send your mail at',
-                    },
+                    emailText:_emailText,
                     languageChangeVal:{
                         CHN:["中文",'英文'],
                         ENG:["CHN",'ENG']

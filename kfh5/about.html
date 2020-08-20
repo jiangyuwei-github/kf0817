@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="css/swiper.min.css">
     <link rel="stylesheet" href="css/dialog.css"/>
     <link rel="stylesheet" href="css/basice.css">
+
+    <link rel="stylesheet" href="css/quill.core.css"/>
+    <link rel="stylesheet" href="css/quill.snow.css">
+    <link rel="stylesheet" href="css/quill.bubble.css"/>
+
     <script src="js/scroll.js"></script>
     <script src="js/swiper.min.js"></script>
     <script src="js/jquery.dialog.min.js"></script>
@@ -20,8 +25,8 @@
     <script src="js/data.js"></script>
 </head>
 <body>
-<div  id="allData" >
-    <div  class="pc">
+<div  id="allData"  >
+    <div class="pc">
         <div class="banner">
             <div class="topWarp clearfix">
                 <div class="topLog left"><img src="./image/logo.png" alt=""></div>
@@ -41,7 +46,7 @@
             <div class="nav">
                 <div class="navBox clearfix">
                     <div class="navItem "><a href="./index.html" v-text='navData[language][0]'></a></div>
-                    <div class="navItem"><a href="./about.html" v-text='navData[language][1]'></a></div>
+                    <div class="navItem"><a href="" v-text='navData[language][1]'  class="active"></a></div>
                     <div class="line">|</div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
@@ -49,41 +54,24 @@
                 <div class="language clearfix">
                     <div class="languageItem" @click='showLanguage'>
                         <!-- <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
-                        <div class="text" v-text="language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
+                        <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
                         <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
                     </div>
                     <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
                         <!-- <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
-                        <div class="text" v-text="language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
+                        <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
                     </div>
                 </div>
             </div>
             <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
             <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
         </div>
-
-        <div class="videoList">
-            <div class="videoListItem clearfix">
-                <div class="itemImg left pcViode"   mark='url1'><img src="./image/videoItem1.png" alt=""></div>
-                <div class="itemText right">
-                    <div class="title" v-text="videoDataL[language][0].title"></div>
-                    <div class="text" v-text="videoDataL[language][0].text"></div>
-                </div>
-            </div>
-            <div class="videoListItem clearfix">
-                <div class="itemImg left pcViode"   mark='url2'><img src="./image/videoItem2.png" alt=""></div>
-                <div class="itemText right">
-                    <div class="title"  v-text="videoDataL[language][1].title"></div>
-                    <div class="text" v-text="videoDataL[language][1].text"></div>
-                </div>
-            </div>
-            <div class="videoListItem clearfix">
-                <div class="itemImg left pcViode"  mark='url3'><img src="./image/videoItem3.png" alt=""></div>
-                <div class="itemText right">
-                    <div class="title"  v-text="videoDataL[language][2].title"></div>
-                    <div class="text" v-text="videoDataL[language][2].text"></div>
-                </div>
-            </div>
+       
+        <div class="detailBox ql-editor">
+            <div class="title" v-text="detailData[language].title"></div>
+            <!-- <div class="timer"><span style="color: #bf9456;"  v-text='formatDateFn(detailData.createTime)'></span>  <span style="padding:0 5px;color:#a6a6a6;font-size: 18px;">|</span><span style="font-style: oblique;color:#a6a6a6"  v-text='newData[language].news'></span></div> -->
+            <div class="text" v-html="detailData[language].content"></div>
+    
         </div>
 
         <div class="bottomBox">
@@ -96,9 +84,9 @@
                     <div class="bottomlist clearfix">
                         <div class="bottomListItem">
                             <div class="itemHeader" v-text="bottomData[language][0]"></div>
-                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"> Download</a></div>
-                            <div class="itemText"><a href="#news"  v-text="bottomData[language][5]"> News</a></div>
-                            <div class="itemText"><a href="#video"  v-text="bottomData[language][4]"> Video</a></div>
+                            <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][3]"></a></div>
+                            <div class="itemText"><a href="#news"  v-text="bottomData[language][5]"></a></div>
+                            <div class="itemText"><a href="#video"  v-text="bottomData[language][4]"></a></div>
                         </div>
 
                         <div class="bottomListItem">
@@ -118,8 +106,8 @@
             </div>
 
         </div>
-
     </div>
+
 
     <div class="mobile">
         <div class="titlebox">
@@ -133,53 +121,29 @@
         
             <div class="navList" v-show='showNav'>
                 <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
-                <div class="navItem" ><a href="./about.html" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
             </div>
         
         </div>
-
-        
         <div class="banner">
             <div class="bgImg"><img src="image/banner.jpg" alt=""></div>
             <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
             <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
         </div>
-    
-        <!-- <div class="downBox clearfix">
-            <div class="downWarp clearfix">
-                <div class="downItem"><a href="#"><img src="./image/app.png" alt=""></a></div>
-                <div class="downItem"><a href="#"><img src="./image/and.png" alt=""></a></div>
-                <div class="downItem"><a href="#"><img src="./image/google.png" alt=""></a></div>
-            </div>
-        </div> -->
+
+
         
-        <div class="videoList">
-            <div class="videoListItem">
-                <div class="itemImg openVideo" mark='url1' ><img src="./image/videoItem1.png" alt=""></div>
-                <div class="itemText">
-                    <div class="title" v-text="videoDataL[language][0].title"></div>
-                    <div class="text" v-text="videoDataL[language][0].text"></div>
-                </div>
-            </div>
-            <div class="videoListItem">
-                <div class="itemImg openVideo" mark='url2' ><img src="./image/videoItem2.png" alt=""></div>
-                <div class="itemText">
-                    <div class="title"  v-text="videoDataL[language][1].title"></div>
-                    <div class="text" v-text="videoDataL[language][1].text"></div>
-                </div>
-            </div>
-            <div class="videoListItem">
-                <div class="itemImg openVideo" mark='url3'><img src="./image/videoItem3.png" alt=""></div>
-                <div class="itemText">
-                    <div class="title"  v-text="videoDataL[language][2].title"></div>
-                    <div class="text" v-text="videoDataL[language][2].text"></div>
-                </div>
-            </div>
+        <div class="detailBox ql-editor">
+            <div class="title" v-text="detailData[language].title"></div>
+            <!-- <div class="timer"><span style="color: #bf9456;" v-text='formatDateFn(detailData.createTime)'></span>  <span style="padding:0 6px;color:#a6a6a6">|</span>  <span style="font-style: oblique;color:#a6a6a6"  v-text='newData[language].news'></span></div> -->
+            <!-- <div class="text" v-text="detailData.text"></div> -->
+            <div class="text" v-html="detailData[language].content"></div>
+            <!-- <div class="bgImg"><img src="./image/detail.jpg" alt=""></div> -->
         </div>
-    
-    
+
+
         <div class="btnBox">
             <div class="btnContent clearfix">
                 <div class="btnItem"><a href=""><img src="./image/btn01.png" alt=""></a></div>
@@ -187,9 +151,8 @@
                 <div class="btnItem"><a href=""><img src="./image/btn03.png" alt=""></a></div>
             </div>
         </div>
-    
+
         <div class="bottomBox">
-    
             <div class="bottomlist">
                 <div class="bottomListItem">
                     <div class="itemHeader" v-text="bottomData[language][0]"></div>
@@ -197,12 +160,12 @@
                     <div class="itemText newScoll"><a href="javascript:void(0);"  v-text="bottomData[language][5]"></a></div>
                     <div class="itemText videoScoll"><a href="javascript:void(0);"  v-text="bottomData[language][4]"></a></div>
                 </div>
-    
+
                 <div class="bottomListItem">
                     <div class="itemHeader" v-text="bottomData[language][1]"></div>
                     <div class="itemText videoScoll"><a  href="javascript:void(0);" v-text="bottomData[language][4]"></a></div>
                 </div>
-    
+
                 <div class="bottomListItem">
                     <div class="itemHeader" v-text="bottomData[language][2]"></div>
                     <div class="itemText"><a href="javascript:void(0);"  v-text="bottomData[language][6]"> </a></div>
@@ -211,13 +174,13 @@
                     <div class="itemText"><a href="javascript:void(0);"> Telegram</a></div>
                 </div>
             </div>
-    
+
             <div class="bottomLogo"><img src="./image/logo.png" alt=""></div>
             <div class="text">COPYRIGHT © 2015-2020 POKER.ALL RIGHTS RESERVED</div>
             
         </div>
-    
-    
+
+
     </div>
 </div>
 
@@ -225,11 +188,18 @@
 <script>
     $(function () {  
 
+            function getUrlParam(name){
+                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+                var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+                if (r!=null) return unescape(r[2]); return null; //返回参数值
+            } 
+       
             var language = 　$.cookie("pokerclubs")  
             if(language !='CHN' && language !='ENG'){
                 language = 'CHN'
             }
            
+
             var vm = new Vue({
                 el: '#allData',
                 data: {
@@ -237,90 +207,92 @@
                     language:language,   //当前语言
                     showNav:false,   //手机端是否显示导航列表 
                     showLang:false,
-                    navData:_navData,
+                    emailText:_emailText,
                     languageChangeVal:{
                         CHN:["中文",'英文'],
                         ENG:["CHN",'ENG']
                     },
-                    emailText:_emailText,
-                    voideUrl:{
-                            url1:'<iframe  class="videoMark" src="https://www.youtube.com/embed/orlECy6jbkM" frameborder="0" allow="accelerometer; autoplay=1; encrypted-media; gyroscope; picture-in-picture" allowFullScreen="true"></iframe>',
-                            url2:'<iframe class="videoMark" src="https://www.youtube.com/embed/teSgwZolENM" frameborder="0" allow="accelerometer; autoplay=1; encrypted-media; gyroscope; picture-in-picture" allowFullScreen="true"></iframe>',
-                            url3:'<iframe class="videoMark" src="https://www.youtube.com/embed/teSgwZolENM" frameborder="0" allow="accelerometer; autoplay=1; encrypted-media; gyroscope; picture-in-picture" allowFullScreen="true"></iframe>'
-                            },
+                    newData:{
+                        "CHN":{news:"新闻"}, 
+                        "ENG":{news:"News"},
+                    },
+                    month:_month,
+                    navData:{
+                        "CHN":["首页","关于","服务","充值"], 
+                        "ENG":["HOME","ABOUT","SERVICES","RECHARGE"],
+                    },
                     bottomData:_bottomData,
-                    videoDataL:{
-                        "ENG":[
-                            {
-                                title:"Create a club",
-                                text:"This video titled ‘Create a Club’ explains in detail how to start your very own club on our APP. Clubs are where the games are organized on PokerClubs APP, it’s helpful for better gaming experience that you create a club with complete information and active members. Following the instructions in this video will help you achieve just that. For better understanding of the info, we do recommend you to download and install our APP before you dive into those videos."
-                            },
-                            {
-                                title:"Club management",
-                                text:"After inception, the club also requires management on its members, games and daily operations. This video titled ‘Create a game’ not only introduces the game settings, also how to manage members and their in game items. For better understanding of the info, we do recommend you to download and install our APP before you dive into those videos."
-                            },
-                            {
-                                title:"Advanced club management video",
-                                text:"This video titled ‘Create a Club’ explains in detail how to start your very own club on our APP. Clubs are where the games are organized on PokerClubs APP, it’s helpful for better gaming experience that you create a club with complete information and active members. "
-                            }
-                        ], 
-                        "CHN":[
-                            {
-                                title:"创建俱乐部",
-                                text:"这部“创建俱乐部”的视频详细介绍如何在APP上建立自己的俱乐部。PokerClubs上的游戏是在各个俱乐部中进行的，为了获得更好的游戏体验，建立一个信息完整，成员活跃的俱乐部是非常有帮助的。按照视频中的步骤操作会帮助您。为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
-                            },
-                            {
-                                title:"俱乐部管理",
-                                text:"俱乐部成立之后，需要管理其中的成员，游戏和日常事务。这部“创建游戏”视频不但详细介绍关于游戏的设置，还介绍了如何对成员的游戏道具进行管理。为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
-                            },
-                            {
-                                title:"俱乐部管理进阶",
-                                text:"俱乐部已经拥有众多的会员了，该如何保证俱乐部拥有者即时了解整个俱乐部的运营情况以及会员的对局情况？为了更好的理解视频内容，我们建议您观看之前下载并安装PokerClubs APP。"
-                            }
-                        ]
-                        }
+                    detailData:{
+                        "CHN":{
+                            title:"关于我们",
+                            content:"PokerClubs was founded at the end of 2019 in Toronto, Canada. During the process of developing PokerClubs, we were very lucky to have received extensive support and expert guidance from PokerMaster. In future, we hope that through our endeavor, the great game of poker can maintain its vitality as a means of social entertainment between friends, even in the face of rising ecosystem challenges.",
+                            createTime:""
+                        }, 
+                        "ENG":{
+                            title:"ABOUT US",
+                            content:"PokerClubs was founded at the end of 2019 in Toronto, Canada.During the process of developing PokerClubs, we were very lucky to have received extensive support and expert guidance from PokerMaster. In future, we hope that through our endeavor, the great game of poker can maintain its vitality as a means of social entertainment between friends, even in the face of rising ecosystem challenges.",
+                            createTime:""
+                        },
+
+                    }
                   
                 },
-                mounted() {
+
+                created(){
                     var that = this
+                    var tempStr = this.language == 'CHN' ?"CH":"EN"
+                    var otherStr = tempStr == 'CH' ? "EN":"CH"
+                    that.detailData = {...data.data}
+                    $.ajax({
+                        url: 'http://pokerclubs.nooly.top/pokerclubs/front/article?language='+tempStr+'&id='+getUrlParam('detail'),
+                        type:"get",
+                        success: function (data) {
+                            if(data.code == '200'){
+                                that.detailData = {...data.data}
+                                that.detailData.createTime = formatDate(that.detailData.createTime,'yyyy-MM-dd')
+                            }else{
+                                $.ajax({
+                                    url: 'http://pokerclubs.nooly.top/pokerclubs/front/article?language='+otherStr+'&id='+getUrlParam('detail'),
+                                    type:"get",
+                                    success: function (data) {
+                                        if(data.code == '200'){
+                                            that.detailData = {...data.data}
+                                            that.detailData.createTime = formatDate(that.detailData.createTime,'yyyy-MM-dd')
+                                        }
+
+                                    },
+                                    error : function(){
+                                    
+                                    }
+                                });
+                            }
+
+                        },
+                        error : function(){
+                        
+                        }
+                    });
+
+                },
+
+                mounted() {
                     this.$nextTick(()=>{
-
-                        $(".openVideo").click(function(){
-                                var url = that.voideUrl
-                                var _mark = $(this).attr("mark");
-                                var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div>'+ url[_mark]+'</div>'
-                                $("#allData").append(content)
-                                $(".vidoePop .close").click(function(){
-                                    $(".vidoePop").remove()
-                                })
-
-                                var elevideo = document.getElementById("video");
-                                    // elevideo.addEventListener('pause', function () { //暂停开始执行的函数
-                                    //     $(".vidoePop").remove()
-                                    // });
-                        })
-
                         boothEvent()
-
-                        //PC视频播放
-                        $('.pcViode').click(function() {
-                            var url = that.voideUrl
-                            var _mark = $(this).attr("mark");
-                            var content = '<div class="pcVoide">' + url[_mark] + '</div>'
-                            // var content = '<video src="'+ url[_mark]+'" controls autoplay style="width:1000px;"></video>';
-                            $.dialog({
-                                id: 'customId',
-                                title: '',
-                                hideHeader: true,
-                                hideClose: false,
-                                content: content,
-                            });
-                        });
-
-
                     })
                 },
                 methods:{
+                    formatDateFn(time){
+                        if(this.language == 'CHN')
+                        {
+                            return formatDate(time,'yyyy.MM.dd')
+                        }else{
+                            var _year = formatDate(time,'yyyy')
+                            var _month = formatDate(time,'MM')
+                            var _Day = formatDate(time,'dd')
+                            return this.month[parseInt(_month)-1] +" " + _Day + ", " + _year
+                        }
+                       
+                    },
                     showLanguage:function(){
                         this.showLang = !this.showLang
                         this.showNav = false
@@ -330,6 +302,7 @@
                         this.showLang = false
                     },
                     changeLanguage:function(){
+
                         if(this.language == 'CHN'){
                             $.cookie("pokerclubs",'ENG')  
                         }

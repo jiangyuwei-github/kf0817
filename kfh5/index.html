@@ -42,20 +42,20 @@
             <div class="nav">
                 <div class="navBox clearfix">
                     <div class="navItem "><a href="javascript:void(0);" class="active" v-text='navData[language][0]'></a></div>
-                    <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][1]'></a></div>
+                    <div class="navItem"><a href="./about.html" v-text='navData[language][1]'></a></div>
                     <div class="line">|</div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][2]'></a></div>
                     <div class="navItem"><a href="javascript:void(0);" v-text='navData[language][3]'></a></div>
                 </div>
                 <div class="language clearfix">
                     <div class="languageItem" @click='showLanguage'>
-                        <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div>
-                        <div class="text">{{language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                        <!-- <div class="img"><img :src='language =="CHN" ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
+                        <div class="text" v-text="language =='CHN' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
                         <div class="icon"><img :src='showLang ? "./image/arrTop.png":"./image/arrBottom.png"' alt=""></div>
                     </div>
                     <div class="languageItem" v-show='showLang'  @click='changeLanguage'>
-                        <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div>
-                        <div class="text">{{language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]}}</div>
+                        <!-- <div class="img"><img :src='language =="ENG"  ? "./image/language02.png":"./image/language01.png"' alt=""></div> -->
+                        <div class="text" v-text="language =='ENG' ? languageChangeVal[language][0] : languageChangeVal[language][1]"></div>
                     </div>
                 </div>
             </div>
@@ -124,6 +124,8 @@
                                     <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理</div></a></div></div>
                                     <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理进阶</div></a></div></div>
                                 </div>
+                                <!-- <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div> -->
                             </div>
                         <!-- </a> -->
                     </div>
@@ -143,7 +145,6 @@
                     <div class="imgBox left moveLeft"  style="width: 48%;" id="viode2">
                         <img src="./image/video3.jpg" alt="">
                     </div>
-        
                     <div class="textBox right moveRight"  style="width: 45%;" :class="{ chin: language =='CHN' }">
                         <div class="inital"  v-text="videoData[language][2].inital"></div>
                         <div class="title" v-text="videoData[language][2].title"></div>
@@ -266,7 +267,7 @@
            
             <div class="navList" v-show='showNav'>
                 <div class="navItem" ><a href="./index.html" v-text='navData[language][0]'></a></div>
-                <div class="navItem" ><a href="" v-text='navData[language][1]'></a></div>
+                <div class="navItem" ><a href="./about.html" v-text='navData[language][1]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][2]'></a></div>
                 <div class="navItem" ><a href="" v-text='navData[language][3]'></a></div>
             </div>
@@ -333,6 +334,8 @@
                                     <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理</div></a></div></div>
                                     <div class="swiper-slide"><img src="./image/video2.png" alt=""><div class="toLine"><a href="./videoList.html" style="display: block;"><img src="./image/playIcon.png" alt=""><div class="text">俱乐部管理进阶</div></a></div></div>
                                 </div>
+                                <!-- <div class="swiper-button-next"></div>
+                                <div class="swiper-button-prev"></div> -->
                             </div>
                         <!-- </a> -->
                     </div>
@@ -452,7 +455,6 @@
             if(language !='CHN' && language !='ENG'){
                 language = 'CHN'
             }
-           
             var vm = new Vue({
                 el: '#allData',
                 data: {
@@ -461,10 +463,11 @@
                         CHN:["中文",'英文'],
                         ENG:["CHN",'ENG']
                     },
-                    emailText:{
-                        "CHN":'发送邮箱至', 
-                        "ENG":'Send your mail at',
-                    },
+                    emailText:_emailText,
+                    voideUrl:{
+                            url1:'<iframe  class="videoMark" src="https://www.youtube.com/embed/5IarPyxXcTQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                            url2:'<iframe class="videoMark" src="https://www.youtube.com/embed/BY1FqPuB-nI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+                            },
                     month:_month,
                     showNav:false,   //手机端是否显示导航列表 
                     showLang:false,
@@ -473,28 +476,28 @@
                     contentList:{},
                     videoData:{
                         "CHN":[{
-                            "inital":"如",
-                            "title":"何在Pokerclubs上开始对局",
+                            "inital":"如何",
+                            "title":"在Pokerclubs上开始对局",
                             "content":"全新组局德州扑克平台，在这里我们从机制上杜绝了用机器人进行游戏的可能性，保障每一个玩家公平游戏的权益，那么，我该如何开始一场对局呢？"
                         },{
-                            "inital":"创",
-                            "title":"建属于自己的俱乐部吧",
+                            "inital":"创建",
+                            "title":"属于自己的俱乐部吧",
                             "content":"如果你是一名资深德州扑克玩家，并且正在寻找一个平台能够让你享受与朋友一起进行德州扑克的乐趣，那么Pokerclubs能够提供给你所需要的一切功能，并且在测试期间完全免费。"
                         },{
-                            "inital":"保",
-                            "title":"险：一种德州扑克新玩法",
+                            "inital":"保险",
+                            "title":"：一种德州扑克新玩法",
                             "content":"没有人喜欢被bad beat的感觉，那么有什么办法可以降低bad beat的损失，减少我们的游戏波动呢？Pokerclubs为您提供了一种全新的解决方案。"
                         },{
-                            "inital":"丰",
-                            "title":"富的德州扑克玩法",
+                            "inital":"丰富",
+                            "title":"的德州扑克玩法",
                             "content":"PokerClubs提供了丰富的玩法，包括德州扑克、奥马哈、五张奥马哈和短牌，以及配套的保险、Ante、Straddle、发多次设置。您可以想怎么玩就怎么玩。"
                         },{
-                            "inital":"安",
-                            "title":"全、公平、可靠",
+                            "inital":"安全",
+                            "title":"、公平、可靠",
                             "content":"PokerClubs从设计上就杜绝了机器人的可能性，在牌桌上提供了极为详细的用户设备、IP、GPS和运营商信息，来帮助您判断对手是否有猫腻，保证游戏的公平可靠。（我们还自愿公开了发牌系统的相关大数据统计，以让您玩得安心。）"
                         },{
-                            "inital":"成",
-                            "title":"为Pokerclubs顶级合作伙伴",
+                            "inital":"成为",
+                            "title":"Pokerclubs顶级合作伙伴",
                             "content":"您是否想进一步扩大您的俱乐部规模？甚至成为某一地区独家代理？那么加入Pokerclubs，成为顶级合作伙伴吧，您将享受更加丰富的俱乐部权益。"
                         }],
                         "ENG":[
@@ -533,7 +536,6 @@
                 created(){
                     var that = this
                     var tempStr = this.language == 'CHN' ?"CH":"EN"
-                
                     $.ajax({
                         url: 'http://pokerclubs.nooly.top/pokerclubs/front/article/list?language=' + tempStr,
                         type:"get",
@@ -546,7 +548,7 @@
                     });
                 },
                 mounted() {
-
+                    var that = this
                     this.$nextTick(()=>{
                         $('.pcScrollBox').myScroll({
                             speed: 40, //数值越大，速度越慢
@@ -556,22 +558,20 @@
 
                         //手机端打开视频
                         $(".openVideo").click(function(){
-                                var url={
-                                    url1:"./image/a.mp4",
-                                    url2:"./image/a.mp4"
-                                }
+                                var url = that.voideUrl
                                 var _mark = $(".openVideo").attr("mark");
 
-                                var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div><video src="'+ url[_mark]+'" controls autoplay style="width:100%;" id="video" class="videoMark"></video></div>'
+                                // var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div><video src="'+ url[_mark]+'" controls autoplay style="width:100%;" id="video" class="videoMark"></video></div>'
+                                var content ='<div class="vidoePop"><div class="videoBg"></div><div class="close"></div>'+ url[_mark]+'</video></div>'
                                 $("#allData").append(content)
-                                $(".vidoePop .close,.videoBg").click(function(){
+                                $(".vidoePop .close").click(function(){
                                     $(".vidoePop").remove()
                                 })
 
-                                var elevideo = document.getElementById("video");
-                                    elevideo.addEventListener('pause', function () { //暂停开始执行的函数
-                                        $(".vidoePop").remove()
-                                    });
+                                // var elevideo = document.getElementById("video");
+                                //     elevideo.addEventListener('pause', function () { //暂停开始执行的函数
+                                //         $(".vidoePop").remove()
+                                //     });
                         })
 
          
@@ -600,7 +600,8 @@
 
                         //pc视频打开
                         $('#viode1').click(function() {
-                            var content = '<video src="./image/a.mp4" controls style="width:1000px;"></video>';
+                            console.log(that.voideUrl)
+                            var content = '<div class="pcVoide">' + that.voideUrl.url1 + '</div>'
                             $.dialog({
                                 id: 'customId',
                                 title: '',
@@ -611,7 +612,7 @@
                         });
 
                         $('#viode2').click(function() {
-                            var content = '<video src="./image/a.mp4" controls style="width:1000px;"></video>';
+                            var content = '<div class="pcVoide">' + that.voideUrl.url2 + '</div>'
                             $.dialog({
                                 id: 'customId',
                                 title: '',

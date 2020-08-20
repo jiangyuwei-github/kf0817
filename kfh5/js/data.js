@@ -8,7 +8,10 @@ var _newList = {
     "ENG":{title:"IMPORTANT NOTICE",news:"News"},
 }
 
-
+var _emailText = {
+    "CHN":'联系我们:', 
+    "ENG":'Contact us:',
+}
 var _bottomData = {
     "CHN":["首页","关于","分享","下载","视频","新闻","脸书","推特","Ins"], 
     "ENG":["Home","About","Social","Download","Video",'News','Facebook',"Twitter","Ins"],
