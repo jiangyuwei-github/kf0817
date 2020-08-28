@@ -275,7 +275,10 @@
         </div>
         <div class="banner">
             <div class="bgImg"><img src="image/banner.jpg" alt=""></div>
-            <div class="textImg"><img :src="'./image/banner'+language+'.png'" alt=""></div>
+            <div class="textImg">
+                <img :src="'./image/bannerMobile'+language+'.png'" alt="" v-show='language == "ENG"'>
+                <img :src="'./image/banner'+language+'.png'" alt="" v-show='language != "ENG"'>
+            </div>
             <div class="rechreg"><a href="javascript:void(0);"><img :src="'./image/rechrge'+language+'.png'" alt=""></a></div>
         </div>
 
@@ -508,7 +511,7 @@
                         },{
                             "inital":"C",
                             "title":"reate your own Club",
-                            "content":"If you are a veteran poker player and looking for a place to enjoy the game with your friends, Pokerclubs offers all the functions that you will need,and it's completely free during testing!"
+                            "content":"If you are a veteran poker player and looking for a place to enjoy the game with your friends, Pokerclubs offers all the functions that you will need,and it's completely free during resting!"
                         },
                         {
                             "inital":"I",
