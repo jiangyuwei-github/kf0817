@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=640,target-densitydpi=device-dpi,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <script src="js/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/dialog.css"/>
+    <link rel="stylesheet" href="css/basice.css">
+    <script src="js/scroll.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.dialog.min.js"></script>
+    <script src="js/booth.js"></script>
+    <script src="js/data.js"></script>
+</head>
+<body>
+<div id="allData">
+
+
+        <div class="infor_body" style="background:red">
+            afdsafd
+            <div style="background:green">inptd</div>
+        </div>
+
+
+
+</div>
+<script>
+    $(function () {  
+        console.log('d')
+        
+        $('.infor_body div').mouseover(function() {
+            console.log("dd")
+              $(this).find('div').show();
+            });
+            $('.infor_body div').mouseleave(function() {
+                console.log("ffffffffff")
+              $(this).find('div').hide();
+            });
+
+
+    })
+
+       
+
+</script>
+    
+</body>
+
+</html>
